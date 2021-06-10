@@ -1,0 +1,54 @@
+{% extends 'labels/basic.html' %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% block title %} Добавление метки на карту {% endblock %}
+</head>
+<body>
+<form method="post" action="/">
+    {% block content %}
+        <script type="text/javascript" language="JavaScript">
+            {% for placemark in placemarks %}
+
+            {% endfor %}
+            function makeRequest(url) {
+                var httpRequest = false;
+
+                if (window.XMLHttpRequest) {
+                    httpRequest = new XMLHttpRequest();
+                    if (httpRequest.overrideMimeType) {
+                        httpRequest.overrideMimeType('text/xml');
+                    }
+                }
+
+                if (!httpRequest) {
+                    alert('Невозможно создать экземпляр запроса')
+                }
+                httpRequest.onreadystatechange = function () {
+                    alertContent(httpRequest);
+                }
+                httpRequest.open('GET', url, true);
+                httpRequest.send(null);
+            }
+
+            function alertContent(httpRequest) {
+                if (httpRequest.readyState == 4) {
+                    if (httpRequest.status == 200) {
+                        alert(httpRequest.responseText);
+                    } else {
+                        alert('Bad request');
+                    }
+                }
+            }
+        </script>
+        <span
+                style="cursor: pointer; text-decoration: underline"
+                onclick="makeRequest('test.html')">
+            Сделать запрос
+            </span>
+    {% endblock %}
+</form>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title></title>{% endblock %}
+    <link rel="stylesheet" href="{% static 'labels/map.css' %}">
+    <script rel="script" type="text/javascript"
+            src="https://api-maps.yandex.ru/2.1/?apikey=21368508-3ff1-46d9-baa6-9326a78777eb&lang=ru_RU">
+    </script>
+</head>
+<body>
+<section>
+    {% block content %}
+        <script type="text/javascript">
+            import ymaps from "yandex-maps";
+
+            let myMap;
+            myMap = ymaps.Map("map", {
+                    center: [37, 56],
+                    zoom: 7
+                },
+                {
+                    searchProvider: "yandex#search"
+                });
+        </script>
+    {% endblock %}
+</section>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Test maps</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'labels/map.css' %}">
+    <script rel="script" type="text/javascript" src=
+            "https://api-maps.yandex.ru/2.1/?apikey=21368508-3ff1-46d9-baa6-9326a78777eb&lang=ru_RU"></script>
+</head>
+<body>
+<script type="text/javascript" data-list="{{ placemarks }}">
+    ymaps.ready(init);
+    var myMap, my_placemark;
+
+    function init() {
+        myMap = new ymaps.Map("map", {
+            center: [45.02, 38.59],
+            zoom: 9
+        }, {
+            searchControlProvider: "yandex#search"
+        });
+        take_event();
+    }
+
+    function take_event() {
+        myMap.events.add("mousedown", function (event) {
+            for (let placemark of data - list.dataset.placemarks) {
+                let point = new ymaps.Placemark([placemark.latitude,
+                    placemark.longitude]);
+                myMap.geoObjects.add(point);
+            }
+            coords = event.get('coords');
+            let latitude = coords[0].toPrecision(6);
+            let longitude = coords[1].toPrecision(6);
+            let point = new ymaps.Placemark([latitude, longitude]);
+            myMap.geoObjects.add(point);
+            alert([latitude, longitude].join(', '));
+        });
+    }
+</script>
+<div id="map"></div>
+</body>
+</html>

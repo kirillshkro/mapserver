@@ -1,0 +1,4 @@
+/node_modules/
+/labels/migrations/
+/venv/
+/db.sqlite3
