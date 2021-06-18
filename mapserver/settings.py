@@ -38,7 +38,7 @@ INSTALLED_APPS = [
 	'corsheaders',
 	'ajaxview',
 	'rest_framework',
-	'labels.apps.LabelsConfig'
+	'tutorial.apps.TutorialConfig'
 ]
 
 MIDDLEWARE = [
