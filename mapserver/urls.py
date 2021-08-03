@@ -17,11 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-# from labels.views import CoordinatesIndex, PlacemarkIndex
+from labels.views import Placemarks
 
 router = DefaultRouter()
-# router.register('coordinate', CoordinatesIndex)
-# router.register('placemarks', PlacemarkIndex)
+router.register('placemarks', Placemarks)
 
 urlpatterns = [
 	path('admin/', admin.site.urls),

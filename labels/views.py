@@ -1,23 +1,17 @@
-import random
-from django.shortcuts import render
 from rest_framework import viewsets
-from .models import PlacemarkModel, Coordinate
-from labels.serializers import PlacemarkSerializer, CoordinateSerializer
+from .models import PlacemarkModel
+from labels.serializers import PlacemarkSerializer
 
 
 # Create your views here.
 
-def index(request):
-	placemarks = PlacemarkModel.objects.all()
-	context = {"placemarks": placemarks}
-	return render(request, "labels/index.html", context)
-
-
-class PlacemarkIndex(viewsets.ModelViewSet):
+class Placemarks(viewsets.ModelViewSet):
 	queryset = PlacemarkModel.objects.all()
 	serializer_class = PlacemarkSerializer
 
-
-class CoordinatesIndex(viewsets.ModelViewSet):
-	queryset = Coordinate.objects.all()
-	serializer_class = CoordinateSerializer
+	def get_queryset(self):
+		queryset = PlacemarkModel.objects.all()
+		title = self.request.query_params.get('title')
+		if title is not None:
+			queryset = queryset.filter(title__icontains=title)
+		return queryset

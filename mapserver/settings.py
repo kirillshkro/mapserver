@@ -36,9 +36,8 @@ INSTALLED_APPS = [
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
 	'corsheaders',
-	'ajaxview',
 	'rest_framework',
-	'tutorial.apps.TutorialConfig'
+	'labels.apps.LabelsConfig'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +50,9 @@ MIDDLEWARE = [
 	'django.contrib.messages.middleware.MessageMiddleware',
 	'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'mapserver.urls'
 
