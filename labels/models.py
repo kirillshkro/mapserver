@@ -20,17 +20,16 @@ class PlacemarkPhoto(PlacemarkModel):
 
 
 class Polygon(models.Model):
-    class Colors(models.IntegerChoices):
-        RED = 0
-        YELLOW = 1
-        GREEN = 2
+    class Colors(models.TextChoices):
+        RED = "#ff0000"
+        YELLOW = "#ffff00"
+        GREEN = "#00ff00"
 
-    color = models.PositiveIntegerField(choices=Colors.choices, default=Colors.RED)
+    color = models.CharField(max_length=50, choices=Colors.choices, default=Colors.RED)
     opacity = models.FloatField(default=0.75)
     border_opacity = models.FloatField(default=0.5)
-    private_id = models.UUIDField(default=uuid4())
+    private_id = models.UUIDField(default=uuid4(), unique=True)
     public_name = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return self.public_name
-
